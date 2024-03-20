@@ -1,70 +1,27 @@
-import AddItem from "./ToDoComponents/AddItem";
-import Content from "./ToDoComponents/Content";
-import Footer from "./ToDoComponents/Footer";
-import Header from "./ToDoComponents/Header";
+import ToDoHead from "./ToDoComponents/ToDoHead";
+import HeadTem from "./Temprature Calulator/HeadTem";
+import AgeCalculator from "./AgeCalculatorComponents/AgeCalculaotr";
+import { Link, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [newItem, setNewItem] = useState("");
-
-  const [items, setItems] = useState([
-    { id: 1, checked: true, item: "Practice Coding" },
-
-    { id: 2, checked: false, item: "Play Cricket" },
-
-    { id: 3, checked: true, item: "Read about AI" },
-  ]);
-
-  const handleCheck = (id) => {
-    const arr = items.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
-    );
-    setItems(arr);
-    localStorage.setItem("todo", JSON.stringify(arr));
-  };
-
-  const haldleRemove = (id) => {
-    const remove = items.filter((items) => items.id !== id);
-    setItems(remove);
-    localStorage.setItem("todo", JSON.stringify(remove));
-  };
-
-  const handleAddSubmit = (e, item) => {
-    e.preventDefault();
-
-    const id = items.length ? items.length + 1 : 1;
-    const vals = { id, checked: false, item };
-    const itemses = [...items, vals];
-    console.log(vals);
-    console.log(itemses);
-    setItems(itemses);
-    setNewItem("");
-  };
+  
 
   return (
     <div className="App">
-      <div className="d-flex justify-content-center m-3">
-        <div style={{ width: "100vh",}}>
-          <Header title="To Do List" />
-          <div style={{border:"2px solid black" }}>
-          <AddItem
-            handleAddSubmit={handleAddSubmit}
-            newItem={newItem}
-            setNewItem={setNewItem}
-          />
-          <div className="my-4">
-            <Content
-              items={items}
-              handleCheck={handleCheck}
-              haldleRemove={haldleRemove}
-            />
-          </div>
-          </div>
-          
-          <Footer length={items.length} />
-        </div>
+      <div>
+        <ol className="bg-dark" style={{display:"flex"}}>
+          <li className="m-3" style={{listStyle:"none"}}><button className="btn btn-primary"><Link className="text-white" style={{textDecoration:"none"}} to="/">To Do List</Link></button></li>
+          <li className="m-3" style={{listStyle:"none"}}><button className="btn btn-danger"> <Link className="text-white" style={{textDecoration:"none"}} to="/temperatureCaluculator">Degree Convertor</Link></button></li>
+          <li className="m-3" style={{listStyle:"none"}}><button className="btn btn-success"><Link className="text-white" style={{textDecoration:"none"}} to="/ageCalculator">Age Calculate</Link></button></li>
+        </ol>
       </div>
+      <Routes>
+        <Route path="/" element={<ToDoHead />}></Route>
+        <Route path="/temperatureCaluculator" element={<HeadTem />}></Route>
+        <Route path="/ageCalculator" element={<AgeCalculator />}></Route>
+      </Routes>
     </div>
   );
 }

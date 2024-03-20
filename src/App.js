@@ -1,7 +1,7 @@
-import AddItem from "./AddItem";
-import Content from "./Content";
-import Footer from "./Footer";
-import Header from "./Header";
+import AddItem from "./ToDoComponents/AddItem";
+import Content from "./ToDoComponents/Content";
+import Footer from "./ToDoComponents/Footer";
+import Header from "./ToDoComponents/Header";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
